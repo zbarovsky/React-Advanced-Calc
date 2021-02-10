@@ -9,7 +9,6 @@ const Calculator = props => {
 
     // get num inputs
     function getNums(e) {
-        //console.log(e.target.value)
         if(mathOperator.length <= 0) {
             addNumOne([...numOne, e.target.value])
             console.log('One: ', numOne)
@@ -40,7 +39,6 @@ const Calculator = props => {
 
         if(mathOperator[0] == '+') {
             let answer = parseFloat(valOne) + parseFloat(valTwo)
-            //console.log(numOne.join('') + numTwo.join(''))
             setOutput(answer)
         } else if (mathOperator[0] == '-') {
             let answer = parseFloat(valOne) - parseFloat(valTwo)

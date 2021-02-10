@@ -18,7 +18,6 @@ const Calculator = props => {
         //console.log(e.target.value)
         if(mathOperator.length <= 0) {
             addNumOne([...numOne, e.target.value])
-            // let join = numOne.join('')
             console.log('One: ', numOne)
         } else {
             addNumTwo([...numTwo, e.target.value])
@@ -28,12 +27,7 @@ const Calculator = props => {
 
     // Get/Set Math Operators
     function setOperator(e) {
-        //console.log(e.target.value)
-        setMathOperator([e.target.value, ...mathOperator])
-        if(mathOperator.length >= 2 && mathOperator[1] != "=") {
-            //setMathOperator([])
-            mathOperator[0] = setMathOperator(e.target.value)
-        }
+        setMathOperator(e.target.value)
         console.log('operator ', mathOperator)
     }
 
@@ -42,17 +36,45 @@ const Calculator = props => {
         setMathOperator([])
         addNumOne([])
         addNumTwo([])
-        //console.log(mathOperator)
+        setOutput([])
+    }
+    
+    // do them math calculations
+    function calculate() {
+        let valOne = numOne.join('')
+        let valTwo = numTwo.join('')
+
+        if(mathOperator[0] == '+') {
+            let answer = parseFloat(valOne) + parseFloat(valTwo)
+            //console.log(numOne.join('') + numTwo.join(''))
+            setOutput(answer)
+        } else if (mathOperator[0] == '-') {
+            let answer = parseFloat(valOne) - parseFloat(valTwo)
+            setOutput(answer)
+        } else if(mathOperator[0] == 'X') {
+            let answer = parseFloat(valOne) * parseFloat(valTwo)
+            setOutput(answer)
+        } else if(mathOperator[0] == '/') {
+            let answer = parseFloat(valOne) / parseFloat(valTwo)
+            setOutput(answer)
+        }
     }
 
+    // display values on calculator
+    let display = 0
+    if(mathOperator.length <= 0) {
+        display = numOne.join('')
+    } else {
+        display = numTwo.join('')
+    }
 
 
     return (
         <div className="container">
             <h1>React Calculator</h1>
             <div className="calc-container">
-                <p>Values: </p>
-                <div className="answer-box">TBD</div>
+                <p>Values: {display} </p>
+                <div className="answer-box">{output}</div>
                 <div className="calc-row">
                     <button className="calc-button calc-button-top" onClick={clear}>AC</button>
                     <button className="calc-button calc-button-top">+/-</button>
@@ -80,7 +102,7 @@ const Calculator = props => {
                 <div className="calc-row">
                     <button className="calc-button width-2" value='0' onClick={getNums}>0</button>
                     <button className="calc-button" value='.' onClick={getNums}>.</button>
-                    <button className="calc-button calc-button-op" value='=' onClick={setOperator}>=</button>
+                    <button className="calc-button calc-button-op" value='=' onClick={calculate}>=</button>
                 </div>
             </div>
         </div>

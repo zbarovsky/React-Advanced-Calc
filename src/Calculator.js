@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 const Calculator = props => {
-    // Declare state variables -- DONE
-    // need something to hold values -- DONE
-    // need way to calculate what math function it is -- DONE
-    // need way to update values for num1/num2/output -- DONE
-    // need to calculate math
-    // need to output appropriate info
 
     const [numOne, addNumOne] = useState([])
     const [numTwo, addNumTwo] = useState([])
